@@ -22,27 +22,28 @@ populate: {
   }
 },
 }
-
 export async function getHomePage() {
-  'use cache'
-  const query = qs.stringify(QUERY_HOME_PAGE)
+  const query = qs.stringify(QUERY_HOME_PAGE);
 
-  const url = `${STRAPI_BASE_URL}/api/home-page?${query}`
+  const url = `${STRAPI_BASE_URL}/api/home-page?${query}`;
 
-  console.log("URL:", url)
+  console.log("URL:", url);
 
-  const response = await fetch(url)
+  const response = await fetch(url);
 
-  console.log("STATUS:", response.status)
+  console.log("STATUS:", response.status);
 
-  const text = await response.text()
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.log("ERROR BODY:", errorText);
 
-  console.log("BODY:", text)
+    throw new Error(
+      `Strapi request failed: ${response.status}`
+    );
+  }
 
-  return text
+  return await response.json();
 }
-
-
 
 export async function getStrapiData(url: string) {
     try {

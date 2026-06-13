@@ -12,8 +12,9 @@ export async function generateMetadata() {
 }
 
 async function HomeContent() {
-  const strapiData = await getHomePage();
 
+  const strapiData: any = await getHomePage();
+  console.log(strapiData)
   console.log({ strapiData });
 
   // 1. Los datos reales viven dentro de strapiData.data
