@@ -38,6 +38,7 @@ export async function getHomePage() {
 export async function getStrapiData(url: string) {
     try {
         const response = await fetch(`${STRAPI_BASE_URL}/${url}`);
+
         if (!response.ok) {
             throw new Error("HTTP error: status" + response.status);
         }
@@ -51,7 +52,8 @@ export async function getStrapiData(url: string) {
 
 export async function registerUserService(userData: object){
     const url = `${STRAPI_BASE_URL}/api/auth/local/register`
-
+    console.log("STRAPI_BASE_URL:", process.env.STRAPI_BASE_URL);
+    console.log("URL:", url);
     try {
         const response = await fetch(url,{
             method: "POST", 
