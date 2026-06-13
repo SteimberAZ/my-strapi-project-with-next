@@ -25,13 +25,22 @@ populate: {
 
 export async function getHomePage() {
   'use cache'
-    cacheLife({expire: 60})
   const query = qs.stringify(QUERY_HOME_PAGE)
-  const response = await fetch(`${STRAPI_BASE_URL}/api/home-page?${query}`);
-  const data = await response.json()
-  return data
-}
 
+  const url = `${STRAPI_BASE_URL}/api/home-page?${query}`
+
+  console.log("URL:", url)
+
+  const response = await fetch(url)
+
+  console.log("STATUS:", response.status)
+
+  const text = await response.text()
+
+  console.log("BODY:", text)
+
+  return text
+}
 
 
 
